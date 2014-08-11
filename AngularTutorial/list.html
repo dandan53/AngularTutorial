@@ -1,0 +1,31 @@
+﻿<form class="form-search">
+    <div class="input-append">
+        <input type="text" ng-model="query" class="input-medium search-query" placeholder="Search">
+        <button ng-click="reset()" type="submit" class="btn"><i class="icon-search"></i></button>
+    </div>
+    <button ng-click="query=''; reset()" ng-disabled="!query" type="submit" class="btn">Reset</button>
+</form>
+
+<table class="table table-striped table-condensed table-hover">
+    <thead>
+        <th><a ng-click="sort('Text')">Todo</a>
+            <span ng-show="sort_order=='Text' && is_desc==true"><i class="ui-icon-arrow-1-n"></i>d</span>
+            <span ng-show="sort_order=='Text' && is_desc==false"><i class="ui-icon-arrow-1-s"></i>u</span>
+        </th>
+        <th>Priority</th>
+        <th>Due</th>
+        <th><a href="#/new"><i class="ui-icon-play">+</i></a></th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="todo in todos" id="todo_{{todo.Id}}">
+            <td>{{todo.Text}}</td>
+            <td>{{todo.Priority}}</td>
+            <td>{{todo.DueDate | date:mediumDate}}</td>
+            <td>
+                <a href="#/edit/{{todo.Id}}"><i class="icon-edit">E</i></a>
+                <a ng-click="delete()"><i class="icon-remove"></i>x</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a ng-show="has_more()" ng-click="show_more()">Show more</a>
